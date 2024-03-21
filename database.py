@@ -23,6 +23,8 @@ class CruiseOrm(Model):
     name: Mapped[str]
     description: Mapped[Optional[str]]
     type: Mapped[str]
+    status: Mapped[str]
+    price: Mapped[int]
     date_start: Mapped[str]
     date_end: Mapped[str]
     ship: Mapped[str]
