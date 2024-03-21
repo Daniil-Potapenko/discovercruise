@@ -1,7 +1,7 @@
 from database import TaskOrm, new_sessions
 from sqlalchemy import select
 from schemas import SCruiseAdd, STaskAdd
-from models.cruise import CruiseOrm
+from database import CruiseOrm
 
 
 class TaskRepository:
