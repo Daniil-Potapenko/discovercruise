@@ -2,15 +2,6 @@ from typing import Optional
 from pydantic import BaseModel
 
 
-class STaskAdd(BaseModel):
-    name: str
-    description: Optional[str] = None
-
-
-class STask(STaskAdd):
-    id: int
-
-
 class SCruiseAdd(BaseModel):
     name: str
     description: str
@@ -21,11 +12,33 @@ class SCruiseAdd(BaseModel):
     date_end: str
     ship: str
     duration: int
-    images: str
+    images: list[str]
     company: str
     departure_point: str
     destination_point: str
 
 
+class SCompany(BaseModel):
+    id: int
+    name: str
+    description: str
+    images: list[str]
+
+
+class SShip(BaseModel):
+    id: int
+    name: str
+    description: str
+    images: list[str]
+
+
+class SHarbour(BaseModel):
+    id: int
+    name: str
+    description: str
+    images: list[str]
+
+
 class SCruise(SCruiseAdd):
     id: int
+
