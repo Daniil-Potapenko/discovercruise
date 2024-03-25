@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends
 from schemas import SCruise, SCruiseAdd
-from repository import CruiseRepository
+from repository.data import CruiseRepository
 
 # router = APIRouter(
 #     prefix='/tasks',

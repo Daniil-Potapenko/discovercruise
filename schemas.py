@@ -12,7 +12,7 @@ class SCruiseAdd(BaseModel):
     date_end: str
     ship: str
     duration: int
-    images: list[str]
+    images: str
     company: str
     departure_point: str
     destination_point: str
@@ -41,4 +41,3 @@ class SHarbour(BaseModel):
 
 class SCruise(SCruiseAdd):
     id: int
-

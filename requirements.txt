@@ -5,3 +5,5 @@ tortoise-orm
 uvicorn
 sqlalchemy
 sqladmin
+itsdangerous
+bcrypt

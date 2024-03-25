@@ -1,13 +1,13 @@
-from database import new_sessions
+from database.database import new_sessions
 from sqlalchemy import select
 from schemas import SCruiseAdd
-from database import CruiseOrm
+from database.database import CruiseOrm
 
 
 class CruiseRepository:
 
     @classmethod
-    async def add_cruise(cls, data: SCruiseAdd) -> int:
+    async def add_cruise(cls, data: SCruiseAdd) -> int | None:
         async with new_sessions() as session:
             cruise_dict = data.model_dump()
 
@@ -32,3 +32,5 @@ class CruiseRepository:
             result = await session.execute(query)
             cruise = result.scalars().all()
             return cruise
+
+
