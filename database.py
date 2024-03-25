@@ -6,10 +6,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 load_dotenv()
 
-engine = create_async_engine(
-    os.getenv('DATABASE_URL')
-)
-
+engine = create_async_engine(os.getenv('DATABASE_URL'))
 new_sessions = async_sessionmaker(engine, expire_on_commit=False)
 
 
@@ -35,11 +32,28 @@ class CruiseOrm(Model):
     destination_point: Mapped[str]
 
 
-class TaskOrm(Model):
-    __tablename__ = 'tasks'
+class ShipOrm(Model):
+    __tablename__ = 'ships'
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
-    description: Mapped[Optional[str]]
+    description: Mapped[str]
+    images: Mapped[str]
+
+
+class CompanyOrm(Model):
+    __tablename__ = "company's"
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    description: Mapped[str]
+    images: Mapped[str]
+
+
+class HarbourOrm(Model):
+    __tablename__ = 'harbour'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    description: Mapped[str]
+    images: Mapped[str]
 
 
 async def create_tables():

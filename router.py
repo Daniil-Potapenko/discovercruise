@@ -1,31 +1,17 @@
 from typing import Annotated
 from fastapi import APIRouter, Depends
-from schemas import SCruise, SCruiseAdd, STask, STaskAdd
-from repository import TaskRepository
+from schemas import SCruise, SCruiseAdd
+from repository import CruiseRepository
 
-router = APIRouter(
-    prefix='/tasks',
-    tags=["Таски"]
-)
-
-
-@router.post('')
-async def add_task(
-        task: Annotated[STaskAdd, Depends()]
-):
-    task_id = await TaskRepository.add_one(task)
-    return {"success": 'true', "id": task_id}
-
-
-@router.get('')
-async def get_all() -> list[STask]:
-    tasks = await TaskRepository.get_all()
-    return tasks
+# router = APIRouter(
+#     prefix='/tasks',
+#     tags=["Таски"]
+# )
 
 
 cruise_router = APIRouter(
     prefix='/cruises',
-    tags=["Cruises"]
+    tags=["Круизы"]
 )
 
 
@@ -33,17 +19,17 @@ cruise_router = APIRouter(
 async def add_cruise(
         cruise: Annotated[SCruiseAdd, Depends()]
 ):
-    cruise_id = await TaskRepository.add_cruise(cruise)
+    cruise_id = await CruiseRepository.add_cruise(cruise)
     return {"success": 'true', "id": cruise_id}
 
 
 @cruise_router.get('')
 async def get_all() -> list[SCruise]:
-    cruises = await TaskRepository.get_all_cruises()
+    cruises = await CruiseRepository.get_all_cruises()
     return cruises
 
 
 @cruise_router.get('/find')
 async def get_one():
-    cruise = await TaskRepository.get_one_cruise()
+    cruise = await CruiseRepository.get_one_cruise()
     return cruise

@@ -1,28 +1,10 @@
-from database import TaskOrm, new_sessions
+from database import new_sessions
 from sqlalchemy import select
-from schemas import SCruiseAdd, STaskAdd
+from schemas import SCruiseAdd
 from database import CruiseOrm
 
 
-class TaskRepository:
-    @classmethod
-    async def add_one(cls, data: STaskAdd) -> int:
-        async with new_sessions() as session:
-            task_dict = data.model_dump()
-
-            task = TaskOrm(**task_dict)
-            session.add(task)
-            await session.flush()
-            await session.commit()
-            return task.id
-
-    @classmethod
-    async def get_all(cls):
-        async with new_sessions() as session:
-            query = select(TaskOrm)
-            result = await session.execute(query)
-            task_models = result.scalars().all()
-            return task_models
+class CruiseRepository:
 
     @classmethod
     async def add_cruise(cls, data: SCruiseAdd) -> int:
