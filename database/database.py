@@ -56,6 +56,13 @@ class HarbourOrm(Model):
     images: Mapped[str]
 
 
+class UserOrm(Model):
+    __tablename__ = 'users'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    name: Mapped[str]
+    hashed_pass: Mapped[str]
+
+
 async def create_tables():
     async with engine.begin() as conn:
         await conn.run_sync(Model.metadata.create_all)
