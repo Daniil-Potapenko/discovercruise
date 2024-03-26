@@ -3,7 +3,7 @@ from database.database import CruiseOrm, ShipOrm, UserOrm
 from sqladmin import ModelView, action
 from sqladmin.authentication import AuthenticationBackend
 from starlette.requests import Request
-from auth import gen_hash, check_password
+from auth import gen_hash, check_password, gen_token, check_token
 
 
 # from starlette.responses import RedirectResponse
@@ -13,13 +13,16 @@ from auth import gen_hash, check_password
 class AdminAuth(AuthenticationBackend):
 
     async def login(self, request: Request) -> bool:
+
         form = await request.form()
         username, password = form["username"], form["password"]
+
         if username and password:
             password_is_correct = await check_password(username, password)
             if not password_is_correct:
                 return False
-            request.session.update({"token": "..."})
+            token = await gen_token()
+            request.session.update({"token": token})
             return True
         else:
             return False
@@ -31,12 +34,10 @@ class AdminAuth(AuthenticationBackend):
 
     async def authenticate(self, request: Request) -> bool:
         token = request.session.get("token")
-
         if not token:
             return False
 
-        # Check the token in depth
-        return True
+        return await check_token(token)
 
 
 class CruiseAdmin(ModelView, model=CruiseOrm):
