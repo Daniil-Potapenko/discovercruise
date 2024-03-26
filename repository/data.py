@@ -1,7 +1,7 @@
 from database.database import new_sessions
 from sqlalchemy import select
 from schemas import SCruiseAdd
-from database.database import CruiseOrm
+from database.database import CruiseOrm, UserOrm
 
 
 class CruiseRepository:
@@ -32,5 +32,4 @@ class CruiseRepository:
             result = await session.execute(query)
             cruise = result.scalars().all()
             return cruise
-
 
