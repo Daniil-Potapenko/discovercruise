@@ -11,3 +11,4 @@ class UsersRepository:
             user = result.scalars().one()
             return user
 
+

@@ -1,7 +1,7 @@
 from database.database import new_sessions
 from sqlalchemy import select
 from schemas import SCruiseAdd
-from database.database import CruiseOrm, UserOrm
+from database.database import CruiseOrm
 
 
 class CruiseRepository:
