@@ -1,7 +1,8 @@
-import datetime
 import os
 import jwt
 import bcrypt
+import datetime
+import sqlalchemy.exc
 from repository.users import UsersRepository
 
 
@@ -17,8 +18,9 @@ async def gen_hash(data):
 
 
 async def check_password(user_name, password):
-    user = await UsersRepository.find_user(user_name)
-    if user is None:
+    try:
+        user = await UsersRepository.find_user(user_name)
+    except sqlalchemy.exc.NoResultFound:
         return False
 
     hashed_password = user.hashed_pass
