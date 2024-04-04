@@ -1,17 +1,15 @@
 import datetime
 import enum
-from typing import Optional, List
-import os
-from dotenv import load_dotenv
+from typing import Optional
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from fastapi_storages import FileSystemStorage
-from fastapi_storages.integrations.sqlalchemy import FileType, ImageType
-from sqlalchemy import Column, ForeignKey, inspect, Integer
+from fastapi_storages.integrations.sqlalchemy import ImageType
+from sqlalchemy import Column, ForeignKey
+from config import settings
 
-load_dotenv()
 
-engine = create_async_engine(os.getenv('DATABASE_URL'))
+engine = create_async_engine(settings.DATABASE_URL)
 new_sessions = async_sessionmaker(engine, expire_on_commit=False)
 storage = FileSystemStorage(path="./storage/")
 

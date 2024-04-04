@@ -1,8 +1,9 @@
-import os
 import jwt
 import bcrypt
 import datetime
 import sqlalchemy.exc
+
+from config import settings
 from repository.users import UsersRepository
 
 
@@ -32,7 +33,7 @@ async def check_password(user_name, password):
 
 async def gen_token():
     try:
-        key = os.getenv('SECRET_KEY')
+        key = settings.SECRET_KEY
         if not key:
             raise ValueError("SECRET_KEY is not set")
 
@@ -51,7 +52,7 @@ async def gen_token():
 
 async def check_token(data):
     try:
-        key = os.getenv('SECRET_KEY')
+        key = settings.SECRET_KEY
         jwt.decode(data, key, algorithms=["HS256"])
         return True
     except jwt.ExpiredSignatureError:

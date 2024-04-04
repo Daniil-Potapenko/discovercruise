@@ -8,7 +8,6 @@ sqladmin~=0.16.1
 itsdangerous
 bcrypt~=4.1.2
 starlette~=0.36.3
-python-dotenv~=1.0.1
 pyjwt
 fastapi_storages
 Pillow

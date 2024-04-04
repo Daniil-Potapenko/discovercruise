@@ -3,11 +3,6 @@ from fastapi import APIRouter, Depends
 from schemas import SCruise, SCruiseAdd
 from repository.data import CruiseRepository
 
-# router = APIRouter(
-#     prefix='/tasks',
-#     tags=["Таски"]
-# )
-
 
 cruise_router = APIRouter(
     prefix='/cruises',

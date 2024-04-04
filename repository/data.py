@@ -5,9 +5,8 @@ from database.database import CruiseOrm
 
 
 class CruiseRepository:
-
     @classmethod
-    async def add_cruise(cls, data: SCruiseAdd) -> int | None:
+    async def add_cruise(cls, data: SCruiseAdd) -> int:
         async with new_sessions() as session:
             cruise_dict = data.model_dump()
 
